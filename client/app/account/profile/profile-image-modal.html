@@ -1,0 +1,15 @@
+<ion-modal-view class="profile-view">
+    <header class="bar bar-header  signup-header">
+      <!-- <button ng-click="profile.closeImageModal();" class="button-icon back-arrow close-arrow" type="button"></button> -->
+      <h1 class="title">Upload Options</h1>
+      <!-- <button class="button blue-color-btn" type="submit">Save</button> -->
+    </header>
+  
+    <ion-content class="has-header padding">
+      <div class="padding">
+        <button class="button button-block button-stable" ng-click="profile.getPhoto(false);"><i class="icon ion-images"></i> Choose from Gallery </button>
+        <button class="button button-block button-stable" ng-click="profile.getPhoto(true);"><i class="icon ion-camera"></i> Take new picture</button>
+        <button class="button button-block button-positive" ng-click="profile.closeImageModal();"> Close </button>
+      </div>
+    </ion-content>  
+</ion-modal-view>

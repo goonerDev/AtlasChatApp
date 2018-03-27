@@ -1,0 +1,68 @@
+/*
+                var iterate_pending_message_data = function() {
+                var p = 0;
+                var k = 0;
+
+                ///////////////////////////////////////////////////////
+                Meteor.call("getPendingMessagesData", vm.chat_data, function(error, result){
+                  if(error){
+                } else {
+                  vm.chat_data.curr_msg_arr = [];
+                var chat_result_data = JSON.parse(result.content);
+                vm.chat_data.curr_msg_arr = chat_result_data.events;
+                var curr_total_messages_len = vm.chat_data.curr_msg_arr.length;
+                //MESSAGE ADD IN MONGO STARTS
+                //MESSAGE DATA STARTS
+
+                ///////STARTS RECURSIVE
+                var iterate_chat_data = function() {
+                if(curr_total_messages_len > 0 ) {
+                if( p < curr_total_messages_len ) {
+                if(vm.chat_data.curr_msg_arr[p].text != undefined && vm.chat_data.curr_msg_arr[p].user_type == 'agent' && vm.chat_data.curr_msg_arr[p].type == "message"  ) {
+                vm.chat_data.message = vm.chat_data.curr_msg_arr[p].text;
+                vm.chat_data.user_type = vm.chat_data.curr_msg_arr[p].user_type;
+                vm.chat_data.is_sent = true;
+                vm.addMessageToMongo("text");
+                //} else if (value.text != undefined && value.user_type == 'visitor' && value.type == "message" ) {                     
+                } else if (vm.chat_data.curr_msg_arr[p].type == "chat_closed") {
+                //CLOSE CHAT FUNTION CALL
+                vm.map_modal.remove();    
+                //clearInterval(vm.chat_data.interval_start_chat);
+                //clearInterval(vm.chat_data.interval_pending_message);
+                Meteor.clearInterval(vm.chat_data.interval_pending_message);
+                Meteor.call("closeChat", vm.chat_data, function(error, result){
+                if(error){
+                vm.chat_data.curr_secured_session_id = null;
+                Toastr.show(error.reason, 'error');
+                return false;
+                } else { 
+                p++;
+                $ionicScrollDelegate.scrollBottom(true);
+                vm.chat_data.is_chat_closed = true;
+                vm.chat_data.button_disable = true;
+                vm.chat_data.curr_secured_session_id = null;
+                $scope.$apply();
+                }
+                }); 
+                }
+                ////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+                vm.chat_data.last_message_id = vm.chat_data.curr_msg_arr[p].message_id;
+                p++;
+                iterate_chat_data();
+                }   
+                }
+                };
+                if(p < 1) {
+                iterate_chat_data();
+                q++;
+                }
+                vm.chat_data.interval_pending_message = Meteor.setTimeout(function(){
+                // console.log("ABCDEFGH <>" + p +" <> " + curr_total_messages_len );
+                if(p <= curr_total_messages_len ){
+                iterate_pending_message_data();
+                }
+                }, 1 * 1000);
+                ///
+                }
+                });
+                }; */

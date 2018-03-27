@@ -1,0 +1,26 @@
+<ion-view title="Settings">
+<ion-content class="has-header padding">
+    
+  <ul class="list cp-list">
+ 
+      <li ui-sref="app.changepassword">
+        <a class="item" ui-sref="app.changepassword">Change Password
+          <i class="icon ion-chevron-right icon-accessory"></i>
+        </a>
+      </li>
+
+      <li>
+        <ion-toggle ng-model="pushNotification.checked"  ng-change="pushNotificationChange()" class="push-title-holder">
+          Push Notifications
+        </ion-toggle>
+
+      </li>
+
+      <li>
+        <a ng-click="logout()" class="item">
+          <span>Logout</span>
+        </a>
+      </li>
+    </ul>
+  </ion-content>
+</ion-view>

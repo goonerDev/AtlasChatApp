@@ -1,0 +1,55 @@
+  <ion-view class="signup-view">
+    <div class="bar bar-header signup-header">
+      <a ui-sref="app.signup" class="back-arrow back-arrow-blue">
+        <!-- <i class="ion-arrow-left-c" data-pack="default" data-tags=""></i> -->
+      </a>
+      <h1 class="signup-title">Sign Up</h1>
+    </div>
+    <ion-content class="has-header padding signupfull-stack signupfull-stack2">
+      <!-- <div class="signup-relative-holder"> -->
+     <form name="signUp1Form" ng-submit="signup1Ctrl.signUp(signUp1Form);" novalidate="" class="form-holder form-field-style">
+        <fieldset>
+          <div class="list mb-25">
+            <div class="row padding-zero">
+              <div class="col ">
+                <label class="item item-input item-style">
+                  <input type="text" name="first_name" placeholder="First Name" ng-model="signup1Ctrl.user.first_name" required>
+                  <error-messages ng-show="(signUp1Form.$submitted || signUp1Form.first_name.$touched)" ng-messages="signUp1Form.first_name.$error"></error-messages>                 
+                  </label>
+              </div>
+              <div class="col">
+                <label class="item item-input item-style">
+                  <input type="text" name="last_name" placeholder="Last Name" ng-model="signup1Ctrl.user.last_name" required>
+                  <error-messages ng-show="(signUp1Form.$submitted || signUp1Form.last_name.$touched)" ng-messages="signUp1Form.last_name.$error"></error-messages>
+                </label>
+              </div>
+            </div>
+            <div class="row padding-zero">
+              <div class="col">
+                <label class="item item-input item-style">
+                  <span class="input-label birthday-plhldr" ng-if="!signup1Ctrl.user.date_of_birth" style="color: #aaa;">Birthday</span>         
+                  <input type="date" placeholder="Birthday" ng-model="signup1Ctrl.user.date_of_birth" >
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="button-bar buttons-gender mb-50 radio-toolbar">
+            <input type="radio" id="radio1" name="gender" ng-model="signup1Ctrl.user.gender" value="male">
+            <label for="radio1" class="button">Male</label>
+            <input type="radio" id="radio2" name="gender" ng-model="signup1Ctrl.user.gender" value="female">
+            <label for="radio2" class="button">Female</label>
+          </div>
+      <div class="signup-footer">
+          <div class="row padding-zero">
+            <div class="col padding-zero">
+              <button type="submit" class="button button-block blue-btn mb-10">Sign Up</button>
+              <div class="text-center max70-percent font12 mt-10">By creating account, you agree to our Terms &amp; Conditions</div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      </form>
+    </ion-content>
+     
+  </ion-view>

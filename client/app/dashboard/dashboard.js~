@@ -1,0 +1,198 @@
+(function(){
+
+	angular.module('atlas')
+	.config(function($stateProvider){
+		$stateProvider.
+		state('app.dashboard', {
+			url: "/dashboard",
+			views: {
+				'menuContent' :{
+					template: "<dashboard-view></dashboard-view>"					
+				}
+			},
+			data : { authenticate : true}/*,
+			resolve: {		        
+		        ChatSessions() {
+		          return Meteor.subscribe('ChatSessions');
+		        }
+		    }*/
+		});
+	})
+	.directive('dashboardView', function () {
+		return {
+			restrict: 'E',
+			templateUrl: "client/app/dashboard/dashboard.html",			
+			controllerAs: 'dashboard',
+			controller: function ($scope, $reactive, $ionicHistory, $rootScope, $state, $stateParams, Auth, $ionicPopup, Toastr) {
+				$reactive(this).attach($scope);
+				$rootScope.header_title = '<span class="atlas-title-db">atlas</span>';
+				$ionicHistory.clearHistory();
+				var vm= this;
+				vm.chat_dashboard_data = {
+		 			chat_session_id : null,
+		 			chat_name : null,
+		 			chat_visitor_id : null,
+		 			start_chat_text : null,
+		 			is_network_found : true,
+		 			button_disable : false,
+		 			chat_session_id : null,
+		 			total_chats : 0,
+		 			testArr : []
+				}
+
+				//PUSH NOTIFICATION HANDLER
+				var handlePushPayload = function(payload) {
+				if (!payload) return;
+				  if (payload.gotoView === 'app.chatsession') {
+				  	console.log("payload payload payload payload");
+				  	console.log(payload);
+				    // Do something within your framework
+				  }
+				};
+
+				//////////////////////////////////// STARTSS ////////////////////////////////////
+				var i =0;
+				//ADD MESSAGE TO MONGO	
+				vm.addDefaultMessageToMongo = function(new_chat_session_id) {
+					vm.message_data = {
+						text : "What can we help you with today?",      
+						user_id : Auth.user.user_id,//vm.chat_data.user_id,
+						user_type : 'agent',
+						lat : null,
+						lng : null,
+						chat_session_id : new_chat_session_id,
+						type : "text",
+						is_sent : false,
+						date : moment().format("MMM DD")
+					};
+					Meteor.call('message.add', vm.message_data, function(error, resAdded){
+						if(error){
+							Toastr.show(error.reason, 'error');
+							return false;
+						} else {
+							return resAdded;
+						}
+					});
+				};
+
+				var addChatDataForNewUser = function(){
+					if(i < 2) {
+						var testX = moment().format("MMM-DD HH:mm");
+						vm.chat_session_data = {
+							name: 'New Task '+ testX,
+							visitor_id : Date.now(),
+							user_id : Auth.user.user_id,
+							livechat_session_ids: "null",
+							ticket_id : "null",
+							archive : false
+						};
+						Meteor.call('chatSession.add', vm.chat_session_data, function(error, result){
+							if(error){
+							console.log(error);
+								Toastr.show(error.reason + "", 'error');
+								return false;
+							} else {
+								vm.addDefaultMessageToMongo(result);
+								setTimeout(function(){
+									vm.chat_data_update_rec = {
+										_id: result,
+										is_read: true
+									};
+								  	Meteor.call('chatSession.update', vm.chat_data_update_rec, function(error, resultChatUpdateRec){
+										if(error){
+											return false;
+										}
+										if( i < 2 ){
+											i++;
+											addChatDataForNewUser();									
+										}
+									});	
+								}, 1000); 
+							}
+						});
+					}
+				};
+				Meteor.call('chatSession.getChatSessionCountByUserId', null, function(error, result){
+					if(error){
+						console.log(error);
+						Toastr.show(error.reason + "", 'error');
+						return false;
+					}
+					vm.total_chats = result;
+					if(vm.total_chats == 0) {
+						addChatDataForNewUser();
+					}
+
+				});
+				//////////////////////////////////// ENDSSSS ////////////////////////////////////
+
+				// Called when message recieved on startup (cold+warm)
+				Push.addListener('startup', function(notification) {
+				  handlePushPayload(notification.payload);
+				});
+
+				this.subscribe('ChatSessions');
+				this.helpers({
+				    chat_sessions: () => {
+						return ChatSessions.find({}, {sort: {updated_at: -1}}).fetch().filter((chatSession) => {
+							return (chatSession.created_at && chatSession.updated_at) && (chatSession.created_at.toString() != chatSession.updated_at.toString());
+						});
+					}
+				});
+				
+				this.openChatSession = function(chat_session_id, chat_name, chat_visitor_id){
+					if(Meteor.status().connected === false && chat_visitor_id == ''){
+						Toastr.show("Network found error", 'error');
+					} else {
+						$state.go('app.chatsession', {chat_param: {chat_session_id: chat_session_id, chat_session_name: chat_name, chat_visitor_id : chat_visitor_id}});
+					}
+				};
+
+				this.chatStartFunc = function(chatStartForm){
+					if(Meteor.status().connected === false){
+						Toastr.show("Network found error", 'error');
+					} else {
+						$state.go('app.chatsession', {
+							chat_param: {chat_session_id: vm.chat_dashboard_data.chat_session_id, 
+							chat_session_name: vm.chat_dashboard_data.start_chat_text, 
+							chat_visitor_id : null
+						}});
+					}
+				};
+		
+				this.removeChatSession = function(chat_session_id){
+					if(Meteor.status().connected === false){
+						Toastr.show("Network found error", 'error');
+					} else {
+						// An elaborate, custom popup
+					   var myPopup = $ionicPopup.show({
+					     // template: '<input type="password" ng-model="data.wifi">',
+					     title: 'Confirm',
+					     template: 'Are you sure you want to delete?',
+					     scope: $scope,
+					     buttons: [
+					       { text: 'Cancel' },
+					       {
+					         text: '<b>Delete</b>',
+					         type: 'button-assertive',
+					         onTap: function(e) {
+					           Meteor.call('chatSession.archive', chat_session_id, function(error, result){
+						       		if(error){
+						       			Toastr.show(error.reason, 'error');
+						       			return false;
+						       		}
+						       	});
+					         }
+					       },
+					     ]
+					   });
+					   myPopup.then(function(res) {
+					     console.log('Tapped!', res);
+					   });							
+					}
+				};
+			}
+		}
+	});
+	
+})();

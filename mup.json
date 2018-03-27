@@ -1,0 +1,19 @@
+{
+  "servers": [
+    {
+      "host": "52.0.0.001",
+      "username": "ubuntu",
+      "pem": ".pem",
+      "env": {}
+    }
+  ],
+  "setupMongo": true,
+  "appName": "Chat-dev",
+  "app": "~/chatApp",
+  "env": {
+    "PORT": 80,
+    "ROOT_URL": "http://52.0.0.001"
+  },
+  "deployCheckWaitTime": 15,
+  "enableUploadProgressBar": true
+}

@@ -1,0 +1,24 @@
+{
+"apn": {
+    "passphrase": "1234",
+    "key": "ios/test.pem",
+    "cert": "ios/test.pem"
+  },
+  "apn-dev": {
+    "passphrase": "1234",
+    "key": "ios/testDev.pem",
+    "cert": "ios/testDev.pem"
+  },
+  "gcm": {
+    "apiKey": "AIzaSyBkdsgdsge44gf4kn45k34h54",
+    "projectNumber": "ChatA[["
+  },
+  "production": true,
+  "badge": true,
+  "sound": true,
+  "alert": true,
+  "vibrate": true,
+  "sendInterval": 15000,
+  "icon" : "pushicon",
+  "iconColor" : "#9BC8F9"
+}

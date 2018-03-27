@@ -1,0 +1,31 @@
+
+<ion-modal-view class="profile-view">
+    <header class="bar bar-header  signup-header">
+      <button ng-click="chatSessionCtrl.closeMapModal();" class="button-icon back-arrow close-arrow" type="button"></button>
+      <h1 class="title">Send Location</h1>
+      <button class="button blue-color-btn" ng-click="chatSessionCtrl.sendMapPosition();">Send</button>
+    </header>
+  
+    <ion-content class="has-header" scroll="false"> 
+
+        <!-- <div id="map" data-tap-disabled="true"></div>      -->
+
+        <ui-gmap-google-map center='chatSessionCtrl.map.center' zoom='chatSessionCtrl.map.zoom' events="chatSessionCtrl.map.markersEvents">
+          <ui-gmap-marker coords="chatSessionCtrl.marker.coords" options="chatSessionCtrl.marker.options" events="chatSessionCtrl.marker.events" idkey="chatSessionCtrl.marker.id" closeClick="chatSessionCtrl.hideMarkerPopup()" onClicked="chatSessionCtrl.showMarkerPopup()">
+
+          </ui-gmap-marker>        
+        </ui-gmap-google-map>
+
+        <!-- <ui-gmap-google-map center='chatSessionCtrl.map.center' zoom='chatSessionCtrl.map.zoom'></ui-gmap-google-map> -->
+<!--         <ui-gmap-google-map center="chatSessionCtrl.map.center" zoom="chatSessionCtrl.map.zoom" draggable="true" options="chatSessionCtrl.options">
+        	<ui-gmap-marker coords="chatSessionCtrl.marker.coords" options="chatSessionCtrl.marker.options" events="chatSessionCtrl.marker.events" idkey="chatSessionCtrl.marker.id">
+        	</ui-gmap-marker>
+	      </ui-gmap-google-map> -->
+	    <!-- <div ng-cloak>
+	        <ul>
+	            <li>coords update ctr: {{chatSessionCtrl.coordsUpdates}}</li>
+	            <li>dynamic move ctr: {{chatSessionCtrl.dynamicMoveCtr}}</li>
+	        </ul>
+	    </div> -->      
+    </ion-content>  
+</ion-modal-view>

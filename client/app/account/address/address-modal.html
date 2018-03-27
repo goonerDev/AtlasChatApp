@@ -1,0 +1,99 @@
+<ion-modal-view class="profile-view">
+<form class="form-field-style add-address-holder" name="addressForm" ng-submit="addressView.saveAddress(addressForm);" novalidate="">      
+  <header class="bar bar-header signup-header">
+    <button ng-click="addressView.closeModal();" class="button-icon back-arrow close-arrow" type="button"></button>
+    <h1 class="title">Add Address</h1>
+    <button class="button blue-color-btn" type="submit">Save</button>
+  </header>
+  <ion-content class="has-header padding">
+
+  <div class="list">
+    <div class="row">
+      <div class="col">
+        <label class="item item-input item-style">
+          <input type="text" ng-model="addressView.address.location"  name="location" placeholder="Name of Location (Home, Work)"/>
+          <error-messages ng-show="(addressForm.$submitted || addressForm.location.$touched)" ng-messages="addressForm.location.$error">
+        </error-messages>          
+      </label>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col">
+      <label class="item item-input item-style">
+        <input type="text" placeholder="Address 1 (Hana Apts 104-dong 915-ho)" ng-model="addressView.address.address_1"  name="address_1" />
+        <error-messages ng-show="(addressForm.$submitted || addressForm.address_1.$touched)" ng-messages="addressForm.address_1.$error">
+      </error-messages>          
+    </label>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col">
+
+    <label class="item item-input item-style">
+      <input type="text" placeholder="Address 2 (Seocho 2-dong 1308-25)" ng-model="addressView.address.address_2">          
+    </label>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+
+    <label class="item item-input item-style">
+      <input type="text" placeholder="Address 3 (Yongsan-gu)" ng-model="addressView.address.address_3">          
+    </label>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col">
+
+    <label class="item item-input item-style">
+      <input type="text" placeholder="City (Seoul)" ng-model="addressView.address.city"  name="city" />
+      <error-messages ng-show="(addressForm.$submitted || addressForm.city.$touched)" ng-messages="addressForm.city.$error">
+    </error-messages>          
+  </label>
+</div>
+</div>
+<div class="row">
+  <div class="col col-67">
+    <label class="item item-input item-style">
+      <input type="text" placeholder="State / Province / Region" ng-model="addressView.address.state"  name="state" />
+      <error-messages ng-show="(addressForm.$submitted || addressForm.state.$touched)" ng-messages="addressForm.state.$error">
+    </error-messages>          
+  </label>
+</div>
+<div class="col">
+  <label class="item item-input item-style">
+    <input type="number" placeholder="Postal Code" ng-model="addressView.address.postal_code"  name="postal_code" />
+    <error-messages ng-show="(addressForm.$submitted || addressForm.postal_code.$touched)" ng-messages="addressForm.postal_code.$error">
+  </error-messages>          
+</label>
+</div>
+</div>
+
+<div class="list" style="border: 0px;padding-left: 3px;">
+
+  <label class="item item-input item-select" style=" border: 0px; border-bottom: 1px solid #ddd;padding-left: 2px;">
+    <div class="input-label">
+      Country
+    </div>
+    <select ng-model="addressView.address.country">
+      <option ng-repeat="country in addressView.countries" value="{{country.name}}">{{country.name}}</option>            
+    </select>
+
+  </label>
+
+</div>  
+
+</div>
+<button type="button" ng-show="addressView.address._id" class="button button-block payment-method-btn delete-btn" ng-click="addressView.deleteAddress();"> 
+  Delete Address
+</button>
+</ion-content>          
+</form>
+</ion-modal-view>

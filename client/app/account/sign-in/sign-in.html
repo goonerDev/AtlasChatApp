@@ -1,0 +1,44 @@
+<ion-view class="login-view">
+  
+<ion-content class="has-login-header">
+
+  <div class="loged-header display-table-holder">
+     <a ui-sref="app.starter" class="back-arrow">
+     <!-- <i class="ion-arrow-left-c" data-pack="default" data-tags=""></i> -->
+     </a>
+     <div class="body-of-table">
+      <h1 class="logo-title">atlas</h1>
+      <span class="text-center block-field lt-tagline">your local assistant</span>
+     </div>
+  </div>
+  <div class="padding display-table-holder">
+    <form class="form-holder form-field-style" name="signInForm" ng-submit="signinCtrl.signIn(signInForm);" novalidate>
+      <fieldset>
+        <div class="list">
+          <label class="item item-input item-style">
+            <input type="email" name="email" ng-model="signinCtrl.user.email" validate-email="" required="" placeholder="Email">                        
+            <error-messages ng-show="(signInForm.$submitted || signInForm.email.$touched)" ng-messages="signInForm.email.$error"></error-messages>
+          </label>
+          <label class="item item-input item-style">
+            <input type="password" name="password" ng-model="signinCtrl.user.password" required="" placeholder="Password">          
+            <error-messages ng-show="(signInForm.$submitted || signInForm.password.$touched)" ng-messages="signInForm.password.$error"></error-messages>
+          </label>
+        </div>
+        <button type="submit" class="button button-block blue-btn mb-20">Log In</button>
+      </fieldset>
+    </form>
+    <a href="javascript:void(0)" ng-click="signinCtrl.openModal();" class="block-field text-center mb-20 forgot-pswd">
+      Forgot password
+    </a>
+    <div class="strip-line mb-20">
+      <span class="sl-color"></span>
+      <span class="sl-text">OR</span>
+    </div>
+     
+    <button ng-click="signinCtrl.signInFacebook();" type="button" class="button button-block facebook-btn">Log In with Facebook</button>
+    
+    <div id="fb-root">
+        </div>
+  </div>
+  </ion-content>
+</ion-view>

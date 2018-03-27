@@ -1,0 +1,57 @@
+<ion-side-menus enable-menu-with-back-views="true">
+  <ion-side-menu-content drag-content="is_authenticated">
+    <header ng-if="is_authenticated" class="bar bar-header signup-header">
+      <div class="buttons left-buttons">
+        <button ng-show="showBackButton();" ng-click="goBack();" class="back-arrow back-arrow-blue"></button>
+        <button ng-show="!showBackButton();"  class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>        
+      </div>    
+      <h1 class="title" ng-bind-html="header_title"></h1>
+      <!-- <div class="buttons right-buttons">        
+        <button ng-show="show_edit_button"  class="button blue-color-btn" ng-click="editButtonCallback()">Edit</button>
+      </div> -->
+        <button ng-show="show_edit_button"  class="button blue-color-btn" ng-click="editButtonCallback()">Edit</button>
+      
+    </header>
+       
+    <ion-nav-view name="menuContent"></ion-nav-view>
+
+  </ion-side-menu-content>
+  <ion-side-menu side="left" class="atlas-side-menu">
+    <profile-data></profile-data>
+    <ion-content class="header-padding-sidebar">
+      <ul class="list list-sidemenu">
+        <li>
+          <a ui-sref="app.profile" class="item" menu-toggle><i class="icon-svg icon-profile"></i>
+            <span>Profile</span>
+          </a>
+        </li>
+        <li>
+          <a ui-sref="app.payments" class="item" menu-toggle><i class="icon-svg icon-payments"></i>
+            <span>Payments</span>
+          </a>
+        </li>
+        <li>
+          <a ui-sref="app.help" class="item" menu-toggle><i class="icon-svg icon-help"></i>
+            <span>Help</span>
+          </a>
+        </li>
+        <li>
+          <a ui-sref="app.settings" class="item" menu-toggle><i class="icon-svg icon-settings"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+        <li>
+          <a ui-sref="app.about" class="item" menu-toggle><i class="icon-svg icon-about"></i>
+            <span>About</span>
+          </a>
+        </li>
+        <!-- <li>
+          <a ng-click="logout()" class="item" menu-toggle>
+          <i class="icon-svg icon ion-log-out" style="font-size: 22px; font-weight: bolder; color: #0A63C5;"></i>
+            <span>Logout</span>
+          </a>
+        </li> -->
+      </ul>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

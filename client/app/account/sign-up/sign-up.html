@@ -1,0 +1,71 @@
+<script type='text/javascript'>
+  ga('send', 'pageview', location.pathname); 
+</script>
+<ion-view class="signup-view">
+
+<div class="bar bar-header signup-header">
+  <a ui-sref="app.starter" class="back-arrow back-arrow-blue">
+   <!-- <i class="ion-arrow-left-c" data-pack="default" data-tags=""></i> -->
+ </a>
+ <h1 class="signup-title">Sign Up</h1>
+</div>
+<ion-content class="has-header padding signupfull-stack">
+<form name="signUpForm" ng-submit="signupCtrl.signUp(signUpForm);" novalidate class="form-holder form-field-style">
+  <fieldset>
+   <div class="pt-40">
+    <button type="button" class="button button-block facebook-btn mb-50" ng-click="signupCtrl.signUpFacebook();">Sign Up with Facebook</button>    
+    <div class="strip-line">
+      <span class="sl-color"></span>
+      <span class="sl-text">OR</span>
+    </div>
+    
+    <div class="list mb-50">
+      <label class="item item-input item-style">
+        <input type="email" ng-model="signupCtrl.user.email"  validate-email="" placeholder="Email" name="email" required>            
+        <error-messages ng-show="(signUpForm.$submitted || signUpForm.email.$touched)" ng-messages="signUpForm.email.$error"></error-messages>
+      </label>
+      <label class="item item-input item-style">
+        <input type="password" 
+          ng-model="signupCtrl.user.password" 
+          placeholder="Password" 
+          minlength="6"
+          name="password" 
+          required>            
+        <error-messages ng-show="(signUpForm.$submitted || signUpForm.password.$touched)" ng-messages="signUpForm.password.$error"></error-messages>
+      </label>
+      <label class="item item-input item-style">
+        <input type="password"           
+          ng-model="signupCtrl.user.confirmPassword" 
+          placeholder="Confirm Password" 
+          name="confirm_password" 
+          compare-to="signupCtrl.user.password" required="">
+
+        <error-messages ng-show="(signUpForm.$submitted || signUpForm.confirm_password.$touched)" ng-messages="signUpForm.confirm_password.$error"></error-messages>            
+      </label>
+    </div>
+    <div class="signup-footer">
+      <button type="submit" class="button button-block blue-btn">Continue</button>
+    </div>
+
+
+  </div>
+</fieldset>
+</form>
+</ion-content>
+
+<!-- <div class="bar bar-footer signup-footer">
+  <button type="submit" class="button button-block blue-btn">Continue</button>
+</div> -->
+
+
+</ion-view>
+
+
+
+
+
+
+
+
+
+

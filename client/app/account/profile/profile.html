@@ -1,0 +1,40 @@
+<ion-view class="profile-view">
+  <!-- <div class="bar bar-header signup-header">
+    <a href="#/splash" class="back-arrow">
+      <i class="ion-arrow-left-c" data-pack="default" data-tags=""></i>
+    </a>
+    <h1 class="signup-title newtask-title">Profile</h1>
+    <button class="button blue-color-btn" ng-click="profile.openModal();">Edit</button>
+  </div> -->
+  <ion-content class="has-header padding">
+  <div class="profile-img-holder">
+    <span class="user-profile-img">
+        <img ng-if="profile.user.image_url" ng-src="{{profile.user.image_url}}" alt="No Image"/>
+        <img ng-if="!profile.user.image_url" src="/imgs/user-profile-image.svg" alt="No Image"/>
+        <!-- <img src="/imgs/fb-img1.png" alt="Image"> -->
+    </span>
+    <span class="user-img-title capitalize">{{profile.user.first_name + ' ' + profile.user.last_name}}</span>
+  </div>
+  <ion-list class="profile-style">
+    <ion-item class="item-input item-stacked-label">
+      <span class="label-block-profile">Email</span>
+      <span class="label-profile-title">{{profile.user.email}}</span>
+    </ion-item>
+    <ion-item class="item-input item-stacked-label">
+      <span class="label-block-profile">Birthday</span>
+      <span class="label-profile-title">{{profile.user.date_of_birth | date:'MMMM d, y'}}</span>
+    </ion-item>
+    <ion-item class="item-input item-stacked-label">
+      <span class="label-block-profile">Gender</span>
+      <span class="label-profile-title capitalize">{{profile.user.gender}}</span>
+    </ion-item>
+    <ion-item class="item-input item-stacked-label">
+      <span class="label-block-profile">Phone</span>
+      <span class="label-profile-title phone-number-title">{{profile.user.phone}}</span>
+    </ion-item>
+    <ion-item ui-sref="app.addresses" class="item-input item-stacked-label item-icon-right address-title-bar">
+      <span class="label-block-profile">Addresses</span> <i class="icon ion-chevron-right icon-accessory"></i> 
+    </ion-item>    
+  </ion-list>  
+</ion-content>
+</ion-view>

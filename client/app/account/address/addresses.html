@@ -1,0 +1,19 @@
+<ion-modal-view class="addresses-view">
+<header class="bar bar-header  signup-header">
+  <button  class="button-icon back-arrow close-arrow"></button>
+  <h1 class="title">Addresses</h1>
+</header>
+<ion-content class="has-header padding">
+	
+	<div ng-repeat="address in addressView.addresses" class="list payments-list addresses-list">
+		<span class="payment-title mt-10 margin-zero">{{address.location}}</span>
+  		<a ng-click="addressView.openModal(address);" href="javascript:void(0);" class="item item-icon-right">
+	    	<span class="titlebig">{{address.address_1}},</span> <span>{{address.city}}</span> <span>{{address.state}},</span><span> {{address.country}} {{address.posta_code}}</span>
+	    	<i class="icon ion-chevron-right"></i>
+  		</a>		
+	</div>
+	<button class="button button-block payment-method-btn" ng-click="addressView.openModal();"> 
+    	Add New Address
+  	</button>
+</ion-content>
+</ion-modal-view>

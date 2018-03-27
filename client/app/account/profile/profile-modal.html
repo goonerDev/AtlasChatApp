@@ -1,0 +1,57 @@
+<ion-modal-view class="profile-view">
+  <form ng-keydown="profile.mufun($event)" ng-submit="profile.saveProfile($event, profileForm);" name="profileForm" novalidate>
+    <header class="bar bar-header  signup-header">
+      <button ng-click="profile.closeModal();" class="button-icon back-arrow close-arrow" type="button"></button>
+      <h1 class="title">Edit Profile</h1>
+      <button class="button blue-color-btn" type="submit">Save</button>
+    </header>
+    <ion-content class="has-header">
+      <div class="profile-img-holder edit-img-holder">
+        <div class="namestack-holder profile-style">
+          <div class="imgleft-stack padding">
+            <span class="user-profile-img">
+              <img ng-click="profile.showActionSheet();" ng-if="profile.original_user.image_url" ng-src="{{profile.original_user.image_url}}" alt="No Image"/>
+              <img ng-click="profile.showActionSheet();" ng-if="!profile.original_user.image_url" src="/imgs/user-profile-image.svg" alt="No Image"/>  
+              <a href="#." class="btn edit-photo-link">Edit photo</a>         
+            </span>
+          </div>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">First Name</span>
+            <input type="text" ng-model="profile.original_user.first_name" name="first_name" required placeholder=""/>
+            <error-messages ng-show="(profileForm.$submitted || profileForm.first_name.$touched)" ng-messages="profileForm.first_name.$error">
+            </error-messages>
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Last Name</span>
+            <input type="text" ng-model="profile.original_user.last_name" name="last_name" required placeholder=""/>
+            <error-messages ng-show="(profileForm.$submitted || profileForm.last_name.$touched)" ng-messages="profileForm.last_name.$error"></error-messages>
+          </label>
+        </div>
+      </div>
+      <div class="list profile-style padding">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Email</span>
+          <!-- <input type="email" placeholder="robin.lyu@gmail.com" ng-model="profile.original_user.email" ng-disabled="true" style="background:none; color: #ccc;"> -->
+          <input type="email" placeholder="example@gmail.com" ng-model="profile.original_user.email" />
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Birthday</span>
+          <input type="date" placeholder="January 01, 1990" ng-model="profile.original_user.date_of_birth"/>
+        </label>
+        <div class="button-bar buttons-gender mt-40 mb-20 radio-toolbar">
+            <input type="radio" id="radio1" name="gender" ng-model="profile.original_user.gender" value="male">
+            <label for="radio1" class="button">Male</label>
+            <input type="radio" id="radio2" name="gender" ng-model="profile.original_user.gender" value="female">
+            <label for="radio2" class="button">Female</label>
+        </div>  
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Phone</span>
+          <input type="tel" placeholder="(+82 10 5555 1212)" ng-model="profile.original_user.phone" name="phone"/>
+          <!-- <error-messages ng-show="(profileForm.$submitted || profileForm.phone.$touched)" ng-messages="profileForm.phone.$error">
+          </error-messages> -->
+        </label>
+      </div>
+    </ion-content>
+  </form>
+</ion-modal-view>

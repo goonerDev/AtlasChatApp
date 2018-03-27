@@ -1,0 +1,119 @@
+<script type='text/javascript'>
+  ga('send', 'pageview', location.pathname); 
+</script>
+<ion-view class="chatsession-view">
+  <header class="bar bar-header signup-header">
+    <button ng-show="showBackButton();" ng-click="goBack();" class="back-arrow back-arrow-blue"></button>
+    <h1 class="title ng-binding" ng-bind-html="header_title">New Task Feb-26 17:36</h1>
+  </header>
+  <ion-content class="has-header chatscreen-holder has-footer" delegate-handle="chatScroll" overflow-scroll="false">
+    <div class="chat-holder mt-15">
+      <div class="chat-history-holder">
+
+
+        <span ng-if=" chatSessionCtrl.chat_data.is_default_message_show == true ">
+          <span >
+            <span class="chat-date-title"> {{chatSessionCtrl.chat_data.date | date:'MMM dd'}} </span>
+        </span>
+
+        <span ng-if="chatSessionCtrl.chat_data.default_message != null && chatSessionCtrl.chat_data.default_message != '' ">
+            <div class="leftside-chat">
+              <span class="chatapp-logo">a</span>
+        <div class="chatmsg-title" ng-model="chatSessionCtrl.chat_data.default_message" style=" white-space: pre-line;"> {{chatSessionCtrl.chat_data.default_message}}
+          <i class="chat-strip"></i>
+          <span class="chattime-title"> {{chatSessionCtrl.chat_data.date | date:'h:mm a'}}</span>
+        </div>
+      </div>
+      </span>
+      </span>
+
+      <div ng-repeat="msg in chatSessionCtrl.messages">
+
+        <span ng-if=" msg.date != chatSessionCtrl.messages[$index - 1].date && chatSessionCtrl.chat_data.is_default_message_show == false">
+            <span class="chat-date-title"> {{msg.date}} </span>
+        </span>
+
+        <div class="chatgroup-holder">
+
+          <!-- DEFAULT MESSAGE -->
+          <!--             <span ng-if="$index  < 1 ">
+              <span ng-if="chatSessionCtrl.chat_data.default_message == null || chatSessionCtrl.chat_data.default_message == '' ">
+                <div class="leftside-chat">
+                  <span class="chatapp-logo">a</span>
+                  <div class="chatmsg-title" ng-model="chatSessionCtrl.chat_data.default_message" style=" white-space: pre-line;"> What can we help you with today?
+                  <i class="chat-strip"></i>
+                    <span  class="chattime-title"> {{msg.date | date:'h:mm a'}}</span>
+                  </div>
+                </div>
+              </span>
+              <span ng-if="chatSessionCtrl.chat_data.default_message != null && chatSessionCtrl.chat_data.default_message != ''  && chatSessionCtrl.chat_data.is_default_message_show == false ">
+                <div class="leftside-chat">
+                  <span class="chatapp-logo">a</span>
+                  <div class="chatmsg-title" ng-model="chatSessionCtrl.chat_data.default_message" style=" white-space: pre-line;"> {{chatSessionCtrl.chat_data.default_message}} 
+                  <i class="chat-strip"></i>
+                    <span  class="chattime-title"> {{chatSessionCtrl.chat_data.date | date:'h:mm a'}}</span>
+                  </div>
+                </div>
+              </span>
+            </span> -->
+
+          <span ng-if="$index  >= 0 ">
+            <div ng-class="{'leftside-chat' : msg.user_type === 'agent', 'leftside-chat rightside-chat': msg.user_type === 'visitor'}">
+              <!-- <span ng-if="chatSessionCtrl.chat_data.is_chat_closed == true">
+              <span class="chat-date-title">Chat has been closed</span>
+          </span> -->
+
+          <span ng-if="msg.type == 'text'">
+                <span ng-if="chatSessionCtrl.chat_data.is_default_message_show == false || $index > 0 " >
+                  <span ng-if="msg.user_type == 'agent'">
+                    <span class="chatapp-logo">a</span>
+          </span>
+          <div class="chatmsg-title" style=" white-space: pre-line;">{{msg.text}}<i class="chat-strip"></i>
+            <span class="chattime-title"> {{msg.created_at | date:'h:mm a'}}</span>
+          </div>
+          </span>
+          </span>
+          <span ng-if="msg.type == 'image'">
+                <div class="chatmsg-title chatimg-style no-pad">
+                  <img src="{{msg.text}}" alt="Image" height="160" />
+                  <i class="chat-strip"></i>
+                <span  class="chattime-title"> {{msg.created_at | date:'h:mm a'}}</span>
+        </div>
+        </span>
+        <span ng-if="msg.type == 'map'">
+                    <div class="chatmsg-title no-pad">    
+                  <div render-map = "msg"></div>
+                <span  class="chattime-title"> {{msg.created_at | date:'h:mm a'}}  </span>
+      </div>
+      </span>
+      <span ng-show="msg.is_sent_ico_status == '0' && msg.user_type == 'visitor'" class='pendingsent'></span>
+      <span ng-show="msg.is_sent_ico_status == '-1' && msg.user_type == 'visitor'" title="Resend Message" class='notsent' ng-click="chatSessionCtrl.resendMsg(msg)"></span>
+    </div>
+    </span>
+    </div>
+    </div>
+
+    <span ng-if="chatSessionCtrl.chat_data.is_chat_closed == true">
+          <span class="chat-date-title"><strong> Chat has been closed </strong> </span>
+    </span>
+    </div>
+
+    </div>
+  </ion-content>
+
+  <ion-footer-bar align-title="left" keyboard-attach class="bar bar-stable chatsubmit-holder">
+
+    <div class="bar text-center-loader" ng-if="chatSessionCtrl.chat_data.isLoading">
+      &nbsp; </div>
+
+    <!-- <button class="chatup-icon" ng-click="chatSessionCtrl.show_sub_footer_overlay = !chatSessionCtrl.show_sub_footer_overlay;"></button> -->
+    <button ng-disabled="chatSessionCtrl.chat_data.button_disable" class="chatup-icon" ng-click="chatSessionCtrl.showQuickLaunchActionSheet();"></button>
+    <form name="sendMsgForm" ng-submit="chatSessionCtrl.sendChatMessage(sendMsgForm);" novalidate class="chatform-style">
+      <label class="chatfield-holder item item-input">
+        <input ng-disabled="chatSessionCtrl.chat_data.button_disable" placeholder="Type a message" ng-model="chatSessionCtrl.chat_data.message_added" name="message_added" required 
+        class="textareaauto" />
+      </label>
+      <!-- <input type="submit" ng-disabled="chatSessionCtrl.chat_data.button_disable" class="chatsubmit-btn" value="Send"/> -->
+    </form>
+  </ion-footer-bar>
+</ion-view>

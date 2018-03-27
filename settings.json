@@ -1,0 +1,20 @@
+{
+  "public" : {
+    "network_not_found_error" : "Please connect to the internet and try again.",
+    "global_stop_pool_messages" : false,
+    "push_notifications_enable" : true,
+    "curr_chat_db_id" : "",
+    "ga": {
+            "id": "UA-111",
+            "create": {
+                "cookieDomain": "qa.chatapp.com",
+                "cookieName": "my_ga_cookie",
+                "cookieExpires": 3600
+            }
+        }
+  },
+  "kadira": {
+    "appId": "45454352s",
+    "appSecret": "db834-203-433-9435gfr-0dsf43gf45"
+  }
+}

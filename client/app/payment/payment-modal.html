@@ -1,0 +1,105 @@
+<ion-modal-view class="payment-view">
+<form ng-submit="paymentView.savePayment(paymentForm);" name="paymentForm" novalidate>
+<header class="bar bar-header signup-header">
+  <button type="button" ng-click="paymentView.closeModal();" class="button-icon back-arrow close-arrow"></button>
+  <h1 class="title">Add Payment</h1>
+  <button class="button blue-color-btn" type="submit">Save</button>
+</header>
+<ion-content class="has-header padding">
+  <div ng-if="paymentView.show_modal_loader" class="text-center mt-10">
+     <ion-spinner icon="spiral" class="spinner-positive"> </ion-spinner>      
+  </div>
+  <div class="payments-holder addpayment-method ">
+    <div class="list">
+      <div class="row">
+
+        <div class="col">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Card Number</span>            
+            <input type="text" ng-model="paymentView.card.card_number" 
+                   required="" name="card_number" 
+                   minlength="13"
+                   maxlength="19"
+                   restrict-numbers="" 
+                   ng-readonly="paymentView.card.id" 
+                   placeholder="4444 5555 6666 7777">
+            <error-messages ng-show="(paymentForm.$submitted || paymentForm.card_number.$touched)" ng-messages="paymentForm.card_number.$error">
+            </error-messages>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Month</span>
+            <input type="number" 
+                   placeholder="01" 
+                   ng-model="paymentView.card.exp_month" 
+                   maxlength="2"
+                   restrict-numbers="" 
+                   name="exp_month"  
+                   required="">
+            <error-messages ng-show="(paymentForm.$submitted || paymentForm.exp_month.$touched)" ng-messages="paymentForm.exp_month.$error">
+            </error-messages>
+          </label>
+        </div>
+        <div class="col">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Year</span>
+            <input type="number" 
+                   placeholder="2017" 
+                   minlength="4"
+                   maxlength="4"
+                   restrict-numbers="" 
+                   ng-model="paymentView.card.exp_year" 
+                   name="exp_year" 
+                   required="">
+            <error-messages ng-show="(paymentForm.$submitted || paymentForm.exp_year.$touched)" ng-messages="paymentForm.exp_year.$error">
+            </error-messages>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">CVV</span>
+            <input type="text" placeholder="111" 
+                   ng-model="paymentView.card.cvc" 
+                   minlength="3"
+                   maxlength="4"
+                   name="cvc" 
+                   restrict-numbers="" 
+                   ng-readonly="paymentView.card.id" 
+                   required="">
+            <error-messages ng-show="(paymentForm.$submitted || paymentForm.cvc.$touched)" ng-messages="paymentForm.cvc.$error">
+            </error-messages>
+          </label>
+        </div>
+        <!-- <div class="col">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Postal</span>
+            <input type="text" placeholder="10001" ng-model="paymentView.card.postal" name="postal">            
+          </label>
+        </div> -->
+      </div>
+    </div>
+
+    <div class="text-center mt-25 mb-50">
+      <label class="block-title-center">
+        <ion-checkbox ng-model="paymentView.card.is_default" ng-readonly="paymentView.default_card_id && paymentView.default_card_id===paymentView.card.id" name="is_default">Set as default payment</ion-checkbox>
+          <!-- <input type="checkbox" value="" ng-model="paymentView.card.is_default" ng-disabled="paymentView.default_card_id && paymentView.default_card_id===paymentView.card.id" name="is_default">
+            <span> Set as default payment</span> -->
+      </label>
+    </div>
+    <div class="text-centera authorized-title">
+      You will not be charged until you
+      authorize a transaction.
+    </div>
+
+  </div>
+
+</ion-content>
+</form>
+</ion-modal-view>
+
+

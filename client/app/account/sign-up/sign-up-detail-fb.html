@@ -1,0 +1,94 @@
+<ion-view class="signup-view">
+
+<div class="bar bar-header signup-header">
+  <a ui-sref="app.signup" class="back-arrow back-arrow-blue">
+   <!-- <i class="ion-arrow-left-c" data-pack="default" data-tags=""></i> -->
+ </a>
+ <h1 class="signup-title">Sign Up</h1>
+</div>
+<ion-content class="has-header padding">
+<form name="signUpFbForm" ng-submit="signupFbCtrl.signUpFacebook(signUpFbForm);" novalidate=""  class="form-holder form-field-style">
+  <fieldset>
+    <div class="fb-img mt-10">
+      <img ng-src="{{signupFbCtrl.user.image_url}}" alt="Image" />
+    </div>
+    <div class="list">
+      <div class="row">
+        <div class="col">
+          <label class="item item-input item-style">
+            <input type="text" placeholder="First Name" ng-model="signupFbCtrl.user.first_name" name="first_name" required>
+            <error-messages ng-show="(signUpFbForm.$submitted || signUpFbForm.last_name.$touched)" ng-messages="signUpFbForm.last_name.$error"></error-messages>
+          </label>
+        </div>
+        <div class="col">
+          <label class="item item-input item-style">
+            <input type="text" placeholder="Last Name" ng-model="signupFbCtrl.user.last_name" name="last_name" required>
+            <error-messages ng-show="(signUpFbForm.$submitted || signUpFbForm.last_name.$touched)" ng-messages="signUpFbForm.last_name.$error"></error-messages>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label class="item item-input item-style padding-zero margin-zero">            
+            <span class="input-label birthday-plhldr" ng-if="!signupFbCtrl.user.date_of_birth" style="color: #aaa;">Birthday</span>         
+            <input type="date" placeholder="Birthday" ng-model="signupFbCtrl.user.date_of_birth">
+          </label>
+        </div>
+      </div>
+    </div>
+        <!-- <div class="button-bar buttons-gender mb-10">
+          <a class="button activated" href="javascript:void(0)">Male</a>
+          <a class="button" href="javascript:void(0)">Female</a>
+        </div> -->
+        <div class="button-bar buttons-gender radio-toolbar">
+          <input type="radio" id="radio3" name="gender" ng-model="signupFbCtrl.user.gender"  value="male">
+          <label for="radio3" class="button">Male</label>
+          <input type="radio" id="radio4" name="gender" ng-model="signupFbCtrl.user.gender"  value="female">
+          <label for="radio4" class="button">Female</label>
+        </div>
+        <div class="row spacing-stack">
+          <div class="col">
+            <label class="item item-input item-style">
+              <input type="password" minlength="6" placeholder="Password" ng-model="signupFbCtrl.user.password" name="password" required="">
+              <error-messages ng-show="(signUpFbForm.$submitted || signUpFbForm.password.$touched)" ng-messages="signUpFbForm.last_name.$error"></error-messages>
+            </label>
+          </div>
+        </div>
+        <div class="row spacing-stack">
+          <div class="col">
+            <label class="item item-input item-style mb-25">
+              <input type="password" placeholder="Confirm Password" ng-model="signupFbCtrl.user.confirm_password"  name="confirm_password" 
+              compare-to="signupFbCtrl.user.password" required="">
+              <error-messages ng-show="(signUpFbForm.$submitted || signUpFbForm.confirm_password.$touched)" ng-messages="signUpFbForm.confirm_password.$error"></error-messages>
+            </label>
+          </div>
+        </div>
+
+        <!-- <div class="bottom-stack bottom-stack-signup2"> -->
+
+        <!-- </div> -->
+
+
+        <div class="signup-footer">
+          <div class="row padding-zero">
+            <div class="col padding-zero">
+              <button type="submit" class="button button-block blue-btn mb-10" >Save</button>
+              <div class="text-center max70-percent font12 mt-10">By creating account, you agree to our Terms &amp; Conditions</div>
+            </div>
+          </div> 
+        </div>
+      </fieldset>
+    </form>
+  </ion-content>
+    <!-- <div class="bar bar-footer signup-footer">
+      <div class="row padding-zero">
+        <div class="col padding-zero">
+          <button type="submit" class="button button-block blue-btn mb-10" >Save</button>
+          <div class="text-center max70-percent font12 mt-10">By creating account, you agree to our Terms &amp; Conditions</div>
+        </div>
+      </div> 
+    </div> -->
+
+
+
+  </ion-view>

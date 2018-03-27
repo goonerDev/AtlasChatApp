@@ -1,0 +1,75 @@
+<script type='text/javascript'>
+  ga('send', 'pageview', location.pathname); 
+</script>
+<ion-view title="Dashboard" class="home-view">
+
+<ion-content class="has-header has-subheader-home">
+
+  <div class="home-banner">
+    <div class="user-info-title">
+      <!-- <h1 class="user-name">Hello Winston</h1> -->
+      <span class="user-help-title">How can we help you today?</span>
+    </div>
+    <div class="row">
+      <div class="col">
+        <a href="javascript:void(0)" class="order-holder" ng-click="dashboard.openChatSession('', 'Order Food', '', '')">
+          <strong class="order-item">
+            <span class="item-icon"> <i class="food-icon"></i> </span>
+          </strong>
+        </a>
+        <span class="item-title">Order<br>Food</span>
+      </div>
+      <div class="col">
+        <a href="javascript:void(0)" class="order-holder" ng-click="dashboard.openChatSession('', 'Buy Something', '', '')">
+          <strong class="order-item">          
+            <span class="item-icon"> <i class="buy-icon"></i> </span>
+          </strong>
+        </a>
+        <span class="item-title">Buy<br>Something</span>
+      </div>
+      <div class="col">
+        <a href="javascript:void(0)" class="order-holder" ng-click="dashboard.openChatSession('', 'Nearby', '', '')">
+          <strong class="order-item">
+            <span class="item-icon"> <i class="todo-icon"></i> </span>
+          </strong>
+        </a>
+        <span class="item-title">Nearby</span>
+      </div>
+      <div class="col">
+        <a href="javascript:void(0)" class="order-holder" ng-click="dashboard.openChatSession('', 'Things To Do', '', '')">
+          <strong class="order-item">
+            <span class="item-icon"><i class="heart-icon"></i> </span>
+          </strong>
+        </a>
+        <span class="item-title">Things<br>To Do</span>
+      </div>
+    </div>
+    <form name="chatStartForm" ng-submit="dashboard.chatStartFunc(chatStartForm);" >
+      <fieldset>
+        <div class="list list-inset search-field">
+          <label class="item item-input"> 
+            <input type="text" ng-model="dashboard.chat_dashboard_data.start_chat_text" placeholder="or something else (e.g. send flowers, find a doctor)" class="search-text-field">
+          </label>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+  <div class="list-holder">
+    <ion-list>
+        <ion-item ng-repeat="session in dashboard.chat_sessions" ng-click="dashboard.openChatSession(session._id,  session.name, session.visitor_id, session.is_read)">
+        <a href="javascript:void(0);" ng-class="{'link-block' : session.is_read == false, 'link-block read-item': session.is_read == true}">
+          <span class="itemDate">  {{session.updated_at | date:'MMM-dd'}} </span>
+          <strong class="list-title"> {{session.name}} </strong>
+          <span class="list-info"> {{session.last_message}}  </span>
+        </a>
+        <ion-option-button class="button button-assertive" ng-click="dashboard.removeChatSession(session._id);"> Delete </ion-option-button>
+      </ion-item>
+          
+    </ion-list>
+</div>
+</ion-content>
+  <div class="bar bar-footer chatIcon-bar">
+    <a href ng-click="dashboard.startNewChatSession()" class="chatIcon"></a>
+  </div>
+</ion-view>read-item
